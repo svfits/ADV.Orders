@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ADV.Orders.Model;
+using ADV.OrdersProducts.Interfaces;
+using ADV.OrdersProducts.Mapping;
+using ADV.OrdersProducts.Service;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +31,10 @@ namespace ADV.Orders
         {
             ///Тут конечно можно использовать любую БД
             services.AddDbContext<DataContextApp>(options => options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
+
+            services.AddAutoMapper(typeof(Mappings));
+
+            services.AddScoped<IServicesHome, ServiceHome>();
 
             services.AddControllersWithViews();
         }
@@ -62,7 +70,9 @@ namespace ADV.Orders
         }
 
         /// <summary>
-        /// Добавление данных для работы API
+        /// Добавление данных
+        /// Это тут только для образца 
+        /// а так можно вынести в midleware 
         /// </summary>
         /// <param name="serviceProvider"></param>
         private void AddDataForAPI(IServiceProvider serviceProvider)
@@ -85,7 +95,7 @@ namespace ADV.Orders
                 db.Orders.Add(new Order()
                 {
                     DateCreate = DateTime.Now.AddDays(i * (-1)),
-                    NumberOrder = "Order №" + i,
+                    OrderName = "Order №" + i,
                     Status = i % 2 == 0 ? Status.Complete : Status.Inprogress,
                     Product = product,
                 });

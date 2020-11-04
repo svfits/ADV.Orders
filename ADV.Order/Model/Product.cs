@@ -1,4 +1,6 @@
-﻿namespace ADV.Orders.Model
+﻿using System.Collections.Generic;
+
+namespace ADV.Orders.Model
 {
     public class Product
     {
@@ -10,6 +12,6 @@
 
         public int Price { get; set; }
 
-        public Order Order { get; set; }
+        public ICollection<Order> Order { get; set; }
     }
 }

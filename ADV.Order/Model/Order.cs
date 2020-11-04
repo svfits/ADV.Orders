@@ -13,7 +13,7 @@ namespace ADV.Orders.Model
 
         public int Id { get; set; }
 
-        public string NumberOrder { get; set; }
+        public string OrderName { get; set; }
 
         public Status Status { get; set; }
 

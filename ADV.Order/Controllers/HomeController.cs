@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ADV.Orders.Models;
+using ADV.OrdersProducts.Interfaces;
 
 namespace ADV.Orders.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        IServicesHome _servicesHome;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IServicesHome servicesHome)
         {
-            _logger = logger;
+            _servicesHome = servicesHome;
         }
 
         public IActionResult Index()
