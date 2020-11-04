@@ -32,11 +32,12 @@ namespace ADV.Orders
             ///Тут конечно можно использовать любую БД
             services.AddDbContext<DataContextApp>(options => options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
 
-            services.AddAutoMapper(typeof(Mappings));
-
             services.AddScoped<IServicesHome, ServiceHome>();
 
+            services.AddAutoMapper(typeof(Mappings));
+
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

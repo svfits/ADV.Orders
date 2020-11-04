@@ -6,33 +6,53 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace ADV.OrdersProducts.Service
 {
     public class ServiceHome : IServicesHome
     {
         private readonly DataContextApp ctx;
-        private readonly Mapper mapper;
 
-        public ServiceHome(DataContextApp ctx, Mapper mapper)
+        private readonly IMapper _mapper;
+
+        public ServiceHome(DataContextApp ctx, IMapper mapper)
         {
             this.ctx = ctx;
-            this.mapper = mapper;
+            _mapper = mapper;
         }
 
-        public Task<DatailsOrderViewModel> GetDatailsOrder(int IdOrder)
+        public async Task<DatailsOrderViewModel> GetDatailsOrder(int IdOrder)
         {
-            throw new NotImplementedException();
+            var datailsOrder = await ctx.Orders
+                .AsNoTracking()
+                .Where(s => s.Id.Equals(IdOrder))
+                .ProjectTo<DatailsOrderViewModel>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync()
+                ;
+
+            return datailsOrder;
+        }
+        public async Task<List<OrdersViewModel>> GetOrders()
+        {
+            var orders = await ctx.Orders
+               .AsNoTracking()
+               .ProjectTo<OrdersViewModel>(_mapper.ConfigurationProvider)
+               .ToListAsync()
+               ;
+
+            return orders;
         }
 
-        public Task<OrdersViewModel> GetOrders()
+        public async Task<ProductsViewModel> GetProducts(int IdOrder)
         {
-            throw new NotImplementedException();
-        }
+            var productsw = await ctx.Orders
+               .Include(s => s.Product)
+               .FirstOrDefaultAsync(l => l.Id == IdOrder)
+               ;
 
-        public Task<ProductsViewModel> GetProducts(int IdOrder)
-        {
-            throw new NotImplementedException();
+            return new ProductsViewModel() { Product = productsw.Product.ToList() };
         }
     }
 }

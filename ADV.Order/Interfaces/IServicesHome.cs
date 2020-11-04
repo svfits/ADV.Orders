@@ -10,7 +10,7 @@ namespace ADV.OrdersProducts.Interfaces
     {
         Task<DatailsOrderViewModel> GetDatailsOrder(int IdOrder);
 
-        Task<OrdersViewModel> GetOrders();
+        Task<List<OrdersViewModel>> GetOrders();
 
         Task<ProductsViewModel> GetProducts(int IdOrder);
     }

@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ADV.Orders.Models;
 using ADV.OrdersProducts.Interfaces;
+using AutoMapper;
 
 namespace ADV.Orders.Controllers
 {
     public class HomeController : Controller
     {
         IServicesHome _servicesHome;
+        private readonly IMapper _mapper;
 
-        public HomeController(IServicesHome servicesHome)
+        public HomeController(IServicesHome servicesHome, IMapper mapper)
         {
             _servicesHome = servicesHome;
+            _mapper = mapper;
         }
 
         public IActionResult Index()

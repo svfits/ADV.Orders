@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ADV.Orders.Model
 {
@@ -11,6 +12,7 @@ namespace ADV.Orders.Model
             Product = new HashSet<Product>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         public string OrderName { get; set; }
@@ -19,7 +21,7 @@ namespace ADV.Orders.Model
 
         public DateTime DateCreate { get; set; }
 
-        public ICollection<Product> Product { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 
     public enum Status

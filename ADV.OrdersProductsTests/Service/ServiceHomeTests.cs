@@ -52,22 +52,34 @@ namespace ADV.OrdersProducts.Service.Tests
             service = new ServiceHome(ctx, _mapper);
         }
 
+        [DataRow(1)]
+        [DataRow(6)]
+        [DataRow(4)]
         [TestMethod()]
-        public void GetDatailsOrderTest()
+        public void GetDatailsOrderTest(int IdOrder)
         {
-            Assert.Fail();
+            var datailOrder = service.GetDatailsOrder(IdOrder).Result;
+
+            Assert.IsNotNull(datailOrder);
         }
 
         [TestMethod()]
         public void GetOrdersTest()
         {
-            Assert.Fail();
+            var orders = service.GetOrders().Result;
+
+            Assert.IsTrue(orders.Count > 0);
         }
 
+        [DataRow(1)]
+        [DataRow(6)]
+        [DataRow(4)]
         [TestMethod()]
-        public void GetProductsTest()
+        public void GetProductsTest(int IdOrder)
         {
-            Assert.Fail();
+            var products = service.GetProducts(IdOrder).Result;
+
+            Assert.IsTrue(products.Product.Count > 0);
         }
     }
 }
