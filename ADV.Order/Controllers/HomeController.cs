@@ -22,8 +22,13 @@ namespace ADV.Orders.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var orders = await _servicesHome.GetOrdersAsync();
+            ViewBag.Orders = orders;
+            ViewBag.DatailOrder = await _servicesHome.GetDatailsOrderAsync(orders.FirstOrDefault().Id);
+            ViewBag.Product = await _servicesHome.GetProductsAsync(orders.FirstOrDefault().Id);
+
             return View();
         }
 

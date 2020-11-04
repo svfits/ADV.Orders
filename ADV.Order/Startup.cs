@@ -30,7 +30,7 @@ namespace ADV.Orders
         public void ConfigureServices(IServiceCollection services)
         {
             ///Тут конечно можно использовать любую БД
-            services.AddDbContext<DataContextApp>(options => options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
+            services.AddDbContext<DataContextApp>(options => options.UseInMemoryDatabase(databaseName: "DB"));
 
             services.AddScoped<IServicesHome, ServiceHome>();
 

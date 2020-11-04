@@ -56,17 +56,17 @@ namespace ADV.OrdersProducts.Service.Tests
         [DataRow(6)]
         [DataRow(4)]
         [TestMethod()]
-        public void GetDatailsOrderTest(int IdOrder)
+        public void GetDatailsOrderAsyncTest(int IdOrder)
         {
-            var datailOrder = service.GetDatailsOrder(IdOrder).Result;
+            var datailOrder = service.GetDatailsOrderAsync(IdOrder).Result;
 
             Assert.IsNotNull(datailOrder);
         }
 
         [TestMethod()]
-        public void GetOrdersTest()
+        public void GetOrdersAsyncTest()
         {
-            var orders = service.GetOrders().Result;
+            var orders = service.GetOrdersAsync().Result;
 
             Assert.IsTrue(orders.Count > 0);
         }
@@ -75,9 +75,9 @@ namespace ADV.OrdersProducts.Service.Tests
         [DataRow(6)]
         [DataRow(4)]
         [TestMethod()]
-        public void GetProductsTest(int IdOrder)
+        public void GetProductsAsyncTest(int IdOrder)
         {
-            var products = service.GetProducts(IdOrder).Result;
+            var products = service.GetProductsAsync(IdOrder).Result;
 
             Assert.IsTrue(products.Product.Count > 0);
         }

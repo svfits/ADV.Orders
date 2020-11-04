@@ -2,7 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="row">
+    <div class="col-md-4">
+        @foreach (var value in (List<ADV.OrdersProducts.Models.OrdersViewModel>)ViewBag.Orders)
+        {
+            
+//value.OrderName + " " + value.DateCreate;
+            
+        }
+    </div>
+    <div class="col-md-8">
+    </div>
 </div>

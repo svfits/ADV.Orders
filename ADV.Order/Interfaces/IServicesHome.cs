@@ -8,10 +8,10 @@ namespace ADV.OrdersProducts.Interfaces
 {
     public interface IServicesHome
     {
-        Task<DatailsOrderViewModel> GetDatailsOrder(int IdOrder);
+        Task<DatailsOrderViewModel> GetDatailsOrderAsync(int IdOrder);
 
-        Task<List<OrdersViewModel>> GetOrders();
+        Task<List<OrdersViewModel>> GetOrdersAsync();
 
-        Task<ProductsViewModel> GetProducts(int IdOrder);
+        Task<ProductsViewModel> GetProductsAsync(int IdOrder);
     }
 }

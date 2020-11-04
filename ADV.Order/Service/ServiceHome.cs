@@ -23,7 +23,7 @@ namespace ADV.OrdersProducts.Service
             _mapper = mapper;
         }
 
-        public async Task<DatailsOrderViewModel> GetDatailsOrder(int IdOrder)
+        public async Task<DatailsOrderViewModel> GetDatailsOrderAsync(int IdOrder)
         {
             var datailsOrder = await ctx.Orders
                 .AsNoTracking()
@@ -34,7 +34,7 @@ namespace ADV.OrdersProducts.Service
 
             return datailsOrder;
         }
-        public async Task<List<OrdersViewModel>> GetOrders()
+        public async Task<List<OrdersViewModel>> GetOrdersAsync()
         {
             var orders = await ctx.Orders
                .AsNoTracking()
@@ -45,14 +45,14 @@ namespace ADV.OrdersProducts.Service
             return orders;
         }
 
-        public async Task<ProductsViewModel> GetProducts(int IdOrder)
+        public async Task<ProductsViewModel> GetProductsAsync(int IdOrder)
         {
-            var productsw = await ctx.Orders
+            var product = await ctx.Orders
                .Include(s => s.Product)
                .FirstOrDefaultAsync(l => l.Id == IdOrder)
                ;
 
-            return new ProductsViewModel() { Product = productsw.Product.ToList() };
+            return new ProductsViewModel() { Product = product.Product.ToList() };
         }
     }
 }
