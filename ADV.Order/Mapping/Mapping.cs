@@ -1,10 +1,7 @@
-﻿using ADV.Orders.Model;
+﻿using ADV.OrdersProducts.Model;
 using ADV.OrdersProducts.Models;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ADV.OrdersProducts.Mapping
 {
@@ -13,11 +10,13 @@ namespace ADV.OrdersProducts.Mapping
         public Mappings()
         {
             CreateMap<Order, DatailsOrderViewModel>()
-                .ForMember(w => w.Total, mem => mem.MapFrom(p => p.Product.Sum(r => r.Qty * r.Price)))
+                .ForMember(w => w.Total, mem => mem.MapFrom(p => p.OrdersProducts.Sum(r => r.Product.Qty * r.Product.Price)))
                 ;
 
             CreateMap<Order, OrdersViewModel>()
                 ;
+
+
         }
     }
 }

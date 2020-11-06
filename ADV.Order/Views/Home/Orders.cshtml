@@ -1,0 +1,8 @@
+﻿@model List<ADV.OrdersProducts.Models.OrdersViewModel>
+<h3>Orders</h3>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.OrderName @item.DateCreate</li>
+    }
+</ul>

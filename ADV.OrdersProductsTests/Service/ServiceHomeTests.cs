@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ADV.OrdersProducts.Service;
+﻿using ADV.OrdersProducts.Mapping;
+using ADV.OrdersProducts.Model;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using ADV.Orders.Model;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using ADV.OrdersProducts.Mapping;
+using System.Linq;
 
 namespace ADV.OrdersProducts.Service.Tests
 {
@@ -24,15 +23,16 @@ namespace ADV.OrdersProducts.Service.Tests
 
             var ctx = new DataContextApp(options);
 
-            var product = new List<Product>();
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 100; i++)
             {
-                product.Add(new Product()
+                ctx.Products.Add(new Product()
                 {
-                    Price = 100,
+                    Price = i * 10,
                     ProductName = "ProductName #" + i,
                     Qty = i,
+
                 });
+                ctx.SaveChanges();
             }
 
             for (int i = 0; i < 10; i++)
@@ -42,11 +42,25 @@ namespace ADV.OrdersProducts.Service.Tests
                     DateCreate = DateTime.Now.AddDays(i * (-1)),
                     OrderName = "Order №" + i,
                     Status = i % 2 == 0 ? Status.Complete : Status.Inprogress,
-                    Product = product,
                 });
             }
-
             ctx.SaveChanges();
+
+            var orders = ctx.Orders.ToList();
+            var product = ctx.Products.ToList();
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 100; j++)
+                {
+                    ctx.Add(new OrdersProducts.Model.OrdersProducts()
+                    {
+                        Order = orders[i],
+                        Product = product[j],
+                    });
+                    ctx.SaveChanges();
+                }
+            }
 
             var _mapper = new Mapper(new MapperConfiguration(c => { c.AddProfile<Mappings>(); }));
             service = new ServiceHome(ctx, _mapper);

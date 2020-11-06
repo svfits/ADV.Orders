@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ADV.Orders.Model
+namespace ADV.OrdersProducts.Model
 {
     public class Order
     {
         public Order()
         {
-            Product = new HashSet<Product>();
+            OrdersProducts = new List<OrdersProducts>();
         }
 
-        [Key]
+        
         public int Id { get; set; }
 
         public string OrderName { get; set; }
@@ -21,7 +21,7 @@ namespace ADV.Orders.Model
 
         public DateTime DateCreate { get; set; }
 
-        public virtual ICollection<Product> Product { get; set; }
+        public List<OrdersProducts> OrdersProducts { get; set; }
     }
 
     public enum Status

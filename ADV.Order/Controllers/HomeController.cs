@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ADV.Orders.Models;
+using ADV.OrdersProducts.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ADV.Orders.Models;
-using ADV.OrdersProducts.Interfaces;
-using AutoMapper;
 
 namespace ADV.Orders.Controllers
 {
     public class HomeController : Controller
     {
-        IServicesHome _servicesHome;
+        readonly IServicesHome _servicesHome;
         private readonly IMapper _mapper;
 
         public HomeController(IServicesHome servicesHome, IMapper mapper)

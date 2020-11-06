@@ -1,20 +1,21 @@
-﻿using ADV.Orders.Model;
+﻿using ADV.OrdersProducts.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Xml.Schema;
+using System.ComponentModel;
 
 namespace ADV.OrdersProducts.Models
 {
     public class DatailsOrderViewModel
     {
+        [DisplayName("Number")]
         public string OrderName { get; set; }
 
+        [DisplayName("Date")]        
         public DateTime DateCreate { get; set; }
 
+        [DisplayName("Status")]
         public Status Status { get; set; }
 
+        [DisplayName("Total")]
         public int Total { get; set; }
     }
 }

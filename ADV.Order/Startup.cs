@@ -1,19 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ADV.Orders.Model;
 using ADV.OrdersProducts.Interfaces;
 using ADV.OrdersProducts.Mapping;
+using ADV.OrdersProducts.Model;
 using ADV.OrdersProducts.Service;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ADV.Orders
 {
@@ -78,31 +76,46 @@ namespace ADV.Orders
         /// <param name="serviceProvider"></param>
         private void AddDataForAPI(IServiceProvider serviceProvider)
         {
-            var db = serviceProvider.GetRequiredService<DataContextApp>();
+            var ctx = serviceProvider.GetRequiredService<DataContextApp>();
 
-            var product = new List<Product>();
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 100; i++)
             {
-                product.Add(new Product()
+                ctx.Products.Add(new Product()
                 {
-                    Price = 100,
+                    Price = i * 10,
                     ProductName = "ProductName #" + i,
                     Qty = i,
+
                 });
+                ctx.SaveChanges();
             }
 
             for (int i = 0; i < 10; i++)
             {
-                db.Orders.Add(new Order()
+                ctx.Orders.Add(new Order()
                 {
                     DateCreate = DateTime.Now.AddDays(i * (-1)),
                     OrderName = "Order ¹" + i,
                     Status = i % 2 == 0 ? Status.Complete : Status.Inprogress,
-                    Product = product,
                 });
             }
+            ctx.SaveChanges();
 
-            db.SaveChanges();
+            var orders = ctx.Orders.ToList();
+            var product = ctx.Products.ToList();
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 100; j++)
+                {
+                    ctx.Add(new OrdersProducts.Model.OrdersProducts()
+                    {
+                        Order = orders[i],
+                        Product = product[j],
+                    });
+                    ctx.SaveChanges();
+                }
+            }
         }
     }
 }

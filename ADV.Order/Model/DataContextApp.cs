@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ADV.Orders.Model
+namespace ADV.OrdersProducts.Model
 {
     public class DataContextApp : DbContext
     {
@@ -17,5 +17,6 @@ namespace ADV.Orders.Model
 
         public virtual DbSet<Product> Products { get; set; }
 
+        public virtual DbSet<OrdersProducts> OrdersProducts { get; set; }
     }
 }

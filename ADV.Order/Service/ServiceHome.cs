@@ -1,13 +1,13 @@
-﻿using ADV.Orders.Model;
-using ADV.OrdersProducts.Interfaces;
+﻿using ADV.OrdersProducts.Interfaces;
+using ADV.OrdersProducts.Model;
 using ADV.OrdersProducts.Models;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace ADV.OrdersProducts.Service
 {
@@ -45,14 +45,19 @@ namespace ADV.OrdersProducts.Service
             return orders;
         }
 
-        public async Task<ProductsViewModel> GetProductsAsync(int IdOrder)
+        public async Task<ProductsViewModel> GetProductsAsync(int orderId)
         {
-            var product = await ctx.Orders
-               .Include(s => s.Product)
-               .FirstOrDefaultAsync(l => l.Id == IdOrder)
+            var product = await ctx.OrdersProducts
+                .Where(k => k.Order.Id == orderId)
+                .Select(b => b.Product)
+                //.Include(d => d.OrdersProducts)
+                //.ThenInclude(sc => sc.Order)
+                //.Select(s => s.OrdersProducts.Where(pp => pp.Order.Id == orderId) ))
+               //.AsNoTracking()
+               .ToListAsync()
                ;
 
-            return new ProductsViewModel() { Product = product.Product.ToList() };
+            return new ProductsViewModel() { Product = product };
         }
     }
 }

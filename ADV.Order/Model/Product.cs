@@ -1,18 +1,14 @@
-﻿using AutoMapper.Configuration.Annotations;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 
-namespace ADV.Orders.Model
+namespace ADV.OrdersProducts.Model
 {
     public class Product
     {
         public Product()
         {
-            //Order = new HashSet<Order>();
+            OrdersProducts = new List<OrdersProducts>();
         }
 
-        [Key]
         public int Id { get; set; }
 
         public string ProductName { get; set; }
@@ -21,7 +17,7 @@ namespace ADV.Orders.Model
 
         public int Price { get; set; }
         
-        
-        //public virtual ICollection<Order> Order { get; set; }
+
+        public List<OrdersProducts> OrdersProducts { get; set; }
     }
 }
