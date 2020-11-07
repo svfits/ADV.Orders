@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ADV.Orders
@@ -106,7 +107,7 @@ namespace ADV.Orders
 
             for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < 10; j++)
                 {
                     ctx.Add(new OrdersProducts.Model.OrdersProducts()
                     {

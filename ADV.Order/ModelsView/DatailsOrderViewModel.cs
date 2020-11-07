@@ -9,8 +9,8 @@ namespace ADV.OrdersProducts.Models
         [DisplayName("Number")]
         public string OrderName { get; set; }
 
-        [DisplayName("Date")]        
-        public DateTime DateCreate { get; set; }
+        [DisplayName("Date")]
+        public string DateCreate { get; set; }
 
         [DisplayName("Status")]
         public Status Status { get; set; }

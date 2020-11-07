@@ -45,19 +45,15 @@ namespace ADV.OrdersProducts.Service
             return orders;
         }
 
-        public async Task<ProductsViewModel> GetProductsAsync(int orderId)
+        public async Task<List<ProductsViewModel>> GetProductsAsync(int orderId)
         {
             var product = await ctx.OrdersProducts
-                .Where(k => k.Order.Id == orderId)
-                .Select(b => b.Product)
-                //.Include(d => d.OrdersProducts)
-                //.ThenInclude(sc => sc.Order)
-                //.Select(s => s.OrdersProducts.Where(pp => pp.Order.Id == orderId) ))
-               //.AsNoTracking()
+               .Where(k => k.Order.Id == orderId)
+               .ProjectTo<ProductsViewModel>(_mapper.ConfigurationProvider)
                .ToListAsync()
-               ;
+              ;
 
-            return new ProductsViewModel() { Product = product };
+            return product;
         }
     }
 }

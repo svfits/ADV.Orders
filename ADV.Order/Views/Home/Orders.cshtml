@@ -3,6 +3,6 @@
 <ul>
     @foreach (var item in Model)
     {
-        <li>@item.OrderName @item.DateCreate</li>
+        <li>@item.OrderName @item.DateCreate.ToString("dd.MM.yyyy HH:mm")</li>
     }
 </ul>

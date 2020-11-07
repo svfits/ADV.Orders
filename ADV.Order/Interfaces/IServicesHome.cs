@@ -12,6 +12,6 @@ namespace ADV.OrdersProducts.Interfaces
 
         Task<List<OrdersViewModel>> GetOrdersAsync();
 
-        Task<ProductsViewModel> GetProductsAsync(int IdOrder);
+        Task<List<ProductsViewModel>> GetProductsAsync(int IdOrder);
     }
 }

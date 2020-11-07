@@ -51,7 +51,7 @@ namespace ADV.OrdersProducts.Service.Tests
 
             for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < 10; j++)
                 {
                     ctx.Add(new OrdersProducts.Model.OrdersProducts()
                     {
@@ -93,7 +93,7 @@ namespace ADV.OrdersProducts.Service.Tests
         {
             var products = service.GetProductsAsync(IdOrder).Result;
 
-            Assert.IsTrue(products.Product.Count > 0);
+            Assert.IsTrue(products.Count > 0);
         }
     }
 }
