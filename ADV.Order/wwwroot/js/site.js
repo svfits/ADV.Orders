@@ -1,4 +1,14 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function viewModel() {
+    this.authorName = ko.observable('Steve Smith');
+    this.twitterAlias = ko.observable('@ardalis');
 
-// Write your JavaScript code.
+    this.twitterUrl = ko.computed(function () {
+        return "https://twitter.com/" + this.twitterAlias().replace('@', '');
+    }, this);
+
+    this.capitalizeTwitterAlias = function () {
+        var currentValue = this.twitterAlias();
+        this.twitterAlias(currentValue.toUpperCase());
+    }
+};
+ko.applyBindings(viewModel);
