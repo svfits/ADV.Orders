@@ -1,5 +1,6 @@
 ﻿using ADV.Orders.Models;
 using ADV.OrdersProducts.Interfaces;
+using ADV.OrdersProducts.ModelsView;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -22,11 +23,15 @@ namespace ADV.Orders.Controllers
         public async Task<IActionResult> Index()
         {
             var orders = await _servicesHome.GetOrdersAsync();
-            ViewBag.Orders = orders;
-            ViewBag.DatailOrder = await _servicesHome.GetDatailsOrderAsync(orders.FirstOrDefault().Id);
-            ViewBag.Product = await _servicesHome.GetProductsAsync(orders.FirstOrDefault().Id);
 
-            return View();
+            var indexView = new IndexHomeViewModel()
+            {
+                ProductsViewModel = await _servicesHome.GetProductsAsync(orders.FirstOrDefault().Id),
+                OrdersViewModel = orders,
+                DatailsOrderViewModel = await _servicesHome.GetDatailsOrderAsync(orders.FirstOrDefault().Id)
+            };
+
+            return View(indexView);
         }
 
         public IActionResult Privacy()
