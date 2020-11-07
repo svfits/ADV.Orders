@@ -12,12 +12,10 @@ namespace ADV.Orders.Controllers
     public class HomeController : Controller
     {
         readonly IServicesHome _servicesHome;
-        private readonly IMapper _mapper;
 
-        public HomeController(IServicesHome servicesHome, IMapper mapper)
+        public HomeController(IServicesHome servicesHome)
         {
             _servicesHome = servicesHome;
-            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
