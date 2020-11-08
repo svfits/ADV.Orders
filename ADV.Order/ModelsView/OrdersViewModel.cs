@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADV.OrdersProducts.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,5 +13,7 @@ namespace ADV.OrdersProducts.Models
         public string OrderName { get; set; }
 
         public DateTime DateCreate { get; set; }
+
+        public Status Status { get; set; }
     }
 }

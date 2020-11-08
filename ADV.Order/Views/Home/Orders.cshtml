@@ -1,8 +1,17 @@
 ﻿@model List<ADV.OrdersProducts.Models.OrdersViewModel>
 <h3>Orders</h3>
-<ul>
+<div class="list-group">
     @foreach (var item in Model)
     {
-        <li>@item.OrderName @item.DateCreate.ToString("dd.MM.yyyy HH:mm")</li>
+        string color = string.Empty;
+        if (item.Status == ADV.OrdersProducts.Model.Status.Complete)
+        {
+            color = "list-group-item list-group-item-action list-group-item-success";
+        }
+        else
+        {
+            color = "list-group-item list-group-item-action list-group-item-danger";
+        }
+        <a class="@color" data-bind="click: capitalizeTwitterAlias">@item.OrderName @item.DateCreate.ToString("dd.MM.yyyy HH:mm")</a>
     }
-</ul>
+</div>
