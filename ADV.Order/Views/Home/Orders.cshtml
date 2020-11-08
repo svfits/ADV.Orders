@@ -12,6 +12,6 @@
         {
             color = "list-group-item list-group-item-action list-group-item-danger";
         }
-        <a class="@color" data-bind="click: capitalizeTwitterAlias">@item.OrderName @item.DateCreate.ToString("dd.MM.yyyy HH:mm")</a>
+        <a class="@color" id="@item.Id" data-bind="click: capitalizeTwitterAlias">@item.OrderName @item.DateCreate.ToString("dd.MM.yyyy HH:mm")</a>
     }
 </div>

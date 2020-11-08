@@ -32,6 +32,20 @@ namespace ADV.Orders.Controllers
             return View(indexView);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DatailOrder([FromQuery] int id)
+        {
+            var datailOrder = await _servicesHome.GetDatailsOrderAsync(id);
+            return PartialView(datailOrder);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Products([FromQuery] int id)
+        {
+            var product = await _servicesHome.GetProductsAsync(id);
+            return PartialView(product);
+        }
+
         public IActionResult Privacy()
         {
             return View();
