@@ -1,41 +1,41 @@
 ﻿@model List<ADV.OrdersProducts.Models.ProductsViewModel>
 
-    <div class="border border border-info">
-        <table class="table">
-            <thead>
+<div class="border border border-info" data-bind="html: products">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Product Name
+                </th>
+                <th>
+                    Qty
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-                        Product Name
-                    </th>
-                    <th>
-                        Qty
-                    </th>
-                    <th>
-                        Price
-                    </th>
-                    <th>
-                        Total
-                    </th>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.Qty
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @item.Total
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @item.ProductName
-                        </td>
-                        <td>
-                            @item.Qty
-                        </td>
-                        <td>
-                            @item.Price
-                        </td>
-                        <td>
-                            @item.Total
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,18 +1,77 @@
 ﻿function viewModel() {
-    this.authorName = ko.observable('Steve Smith');
-    this.twitterAlias = ko.observable('@ardalis');
 
-    //this.twitterUrl = ko.computed(function () {
-    //    console.info("ggggggggggggggggggg1111111111111111");
-    //    return "https://twitter.com/" + this.twitterAlias().replace('@', '');
-    //}, this);
+    var idOrder = 0;
+    //var previousCount = self.datailOrder;
 
-    this.capitalizeTwitterAlias = function () {
+    $.ajax({
+        url: "/Home/DatailOrder",
+        data: {
+            id: idOrder
+        },
+        type: "GET",
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            self.datailOrder = ko.observable(data);
+        },
+        error: function (data) {
+            console.error("Что то произошло не так при получении datailOrder " + data);
+        }
+    });
 
-        var currentValue = this.twitterAlias();
-        console.info("ggggggggggggggggggg222222222222222222222 " + event.target.id);
-        this.twitterAlias(currentValue.toUpperCase());
+    $.ajax({
+        url: "/Home/Products",
+        data: {
+            id: idOrder
+        },
+        type: "GET",
+        dataType: "html",
+        async: false,
+        success: function (data) {
+            self.products = ko.observable(data);
+        },
+        error: function (data) {
+            console.error("Что то произошло не так при получении продуктов " + data);
+        }
+    });
 
+    this.order = function () {
+
+        var self = this;
+        var idOrder = event.target.id;
+
+        $.ajax({
+            url: "/Home/DatailOrder",
+            data: {
+                id: idOrder
+            },
+            type: "GET",
+            dataType: "html",
+            async: false,
+            success: function (data) {
+                self.datailOrder(data);
+            },
+            error: function (data) {
+                console.error("Что то произошло не так при получении datailOrder " + data);
+            }
+        });
+
+        $.ajax({
+            url: "/Home/Products",
+            data: {
+                id: idOrder
+            },
+            type: "GET",
+            dataType: "html",
+            async: false,
+            success: function (data) {
+                self.products = ko.observable(data);
+            },
+            error: function (data) {
+                console.error("Что то произошло не так при получении продуктов " + data);
+            }
+        });
     }
 };
+
 ko.applyBindings(viewModel);

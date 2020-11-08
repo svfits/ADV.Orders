@@ -1,6 +1,18 @@
 ﻿@model ADV.OrdersProducts.Models.DatailsOrderViewModel
 
-<div class="border border border-info">
+@{
+    string colorText = String.Empty;
+    if (Model.Status == ADV.OrdersProducts.Model.Status.Complete)
+    {
+        colorText = "text-success";
+    }
+    else
+    {
+        colorText = "text-danger";
+    }
+}
+
+<div class="border border border-info" data-bind="html: datailOrder" id="datailOrder">
     <div class="container">
         <h4>Datail Order</h4>
         <hr />
@@ -20,17 +32,6 @@
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Status)
             </dt>
-            @{
-                string colorText = String.Empty;
-                if (Model.Status == ADV.OrdersProducts.Model.Status.Complete)
-                {
-                    colorText = "text-success";
-                }
-                else
-                {
-                    colorText = "text-danger";
-                }
-            }
             <dd class="col-sm-10 @colorText">
                 @Html.DisplayFor(model => model.Status)
             </dd>

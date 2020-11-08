@@ -3,17 +3,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <div class="row">
     <div class="col-md-3 border border-info">
         @await Html.PartialAsync("Orders", Model.OrdersViewModel)
     </div>
     <div class="col-md-8 offset-1">
-
         @await Html.PartialAsync("DatailOrder", Model.DatailsOrderViewModel)
-
         <br/>
-
         @await Html.PartialAsync("Products", Model.ProductsViewModel)
     </div>
 </div>
