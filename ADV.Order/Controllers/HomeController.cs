@@ -42,7 +42,7 @@ namespace ADV.Orders.Controllers
         [HttpGet]
         public async Task<IActionResult> Products([FromQuery] int id)
         {
-            var product = await _servicesHome.GetProductsAsync(id);
+            var product = await _servicesHome.GetProductsAsync(id);  
             return PartialView(product);
         }
 
