@@ -92,8 +92,9 @@ namespace ADV.OrdersProducts.Service.Tests
         public void GetProductsAsyncTest(int IdOrder)
         {
             var products = service.GetProductsAsync(IdOrder).Result;
-
+            
             Assert.IsTrue(products.Count > 0);
+            Assert.IsTrue(products.Sum(f => f.Total) == 2850);
         }
     }
 }
