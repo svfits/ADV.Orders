@@ -39,7 +39,7 @@ function viewModel() {
             dataType: "html",
             async: false,
             success: function (data) {
-                self.products = ko.observable(data);
+                self.products(data);
             },
             error: function (data) {
                 console.error("Что то произошло не так при получении продуктов " + data);

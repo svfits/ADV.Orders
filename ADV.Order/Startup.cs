@@ -69,6 +69,8 @@ namespace ADV.Orders
             AddDataForAPI(serviceProvider);
         }
 
+        readonly Random Random = new Random();
+
         /// <summary>
         /// Добавление данных
         /// Это тут только для образца 
@@ -83,9 +85,9 @@ namespace ADV.Orders
             {
                 ctx.Products.Add(new Product()
                 {
-                    Price = i * 10,
+                    Price = Random.Next(1, 19),
                     ProductName = "ProductName #" + i,
-                    Qty = i,
+                    Qty = i == 0 ? 9 : i,
 
                 });
                 ctx.SaveChanges();
@@ -97,26 +99,27 @@ namespace ADV.Orders
                 {
                     DateCreate = DateTime.Now.AddDays(i * (-1)),
                     OrderName = "Order №" + i,
-                    Status = i % 2 == 0 ? Status.Complete : Status.Inprogress,
+                    Status = i % 3 == 0 ? Status.Complete : Status.Inprogress,
                 });
+                ctx.SaveChanges();
             }
-            ctx.SaveChanges();
 
             var orders = ctx.Orders.ToList();
-            var product = ctx.Products.ToList();
+            var product = ctx.Products.Distinct().ToList();          
 
             for (int i = 0; i < 10; i++)
             {
+                //    //var tt = 
                 for (int j = 0; j < 10; j++)
                 {
                     ctx.Add(new OrdersProducts.Model.OrdersProducts()
                     {
-                        Order = orders[i],
-                        Product = product[j],
+                        Order = orders[j],
+                        Product = product[Random.Next(0, 99)],
                     });
-                    ctx.SaveChanges();
                 }
             }
+            ctx.SaveChanges();
         }
     }
 }
