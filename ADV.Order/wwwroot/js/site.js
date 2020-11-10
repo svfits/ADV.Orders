@@ -1,8 +1,8 @@
 ﻿
 function viewModel() {
-    
+
     var self = this;
-    
+
     var datailOrder = $("#datailOrder").html();
     self.datailOrder = ko.observable(datailOrder);
 
@@ -14,6 +14,12 @@ function viewModel() {
         var self = this;
         var idOrder = event.target.id;
 
+        GetDatailOrder(idOrder, self);
+
+        GetProducts(idOrder, self);
+    }
+
+    async function GetDatailOrder(idOrder, self) {
         $.ajax({
             url: "/Home/DatailOrder",
             data: {
@@ -21,7 +27,6 @@ function viewModel() {
             },
             type: "GET",
             dataType: "html",
-            async: false,
             success: function (data) {
                 self.datailOrder(data);
             },
@@ -29,7 +34,9 @@ function viewModel() {
                 console.error("Что то произошло не так при получении datailOrder " + data);
             }
         });
+    }
 
+    async function GetProducts(idOrder, self) {
         $.ajax({
             url: "/Home/Products",
             data: {
@@ -37,7 +44,6 @@ function viewModel() {
             },
             type: "GET",
             dataType: "html",
-            async: false,
             success: function (data) {
                 self.products(data);
             },
@@ -49,3 +55,5 @@ function viewModel() {
 };
 
 ko.applyBindings(viewModel);
+
+
