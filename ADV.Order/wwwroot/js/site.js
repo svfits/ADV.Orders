@@ -55,5 +55,3 @@ function viewModel() {
 };
 
 ko.applyBindings(viewModel);
-
-
